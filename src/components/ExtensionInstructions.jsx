@@ -39,7 +39,7 @@ const ExtensionInstructions = () => {
           className="mt-5 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2"
           onClick={() => {
             const link = document.createElement("a");
-            link.href = "../../public/PassHavenWeb.zip"; // Path to file in public folder
+            link.href = "/PassHavenWeb.zip"; // Path to file in public folder
             link.download = "PassHaven.zip"; // Name of the file for download
             link.click();
           }}
