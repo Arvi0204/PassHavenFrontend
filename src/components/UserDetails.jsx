@@ -11,6 +11,7 @@ export default function UserDetails() {
         createdAt: "",
         lastLogin: ""
     });
+    const host = "https://pass-haven-backend.vercel.app"
     const [updatedPassword, setUpdatedPassword] = useState({ newPassword: "", confirmNewPassword: "" });
     const [showPassword, setShowPassword] = useState(false);
     const [passwordError, setPasswordError] = useState('');
@@ -25,7 +26,7 @@ export default function UserDetails() {
     }, [token]);
     const fetchUserDetails = async () => {
         try {
-            const response = await fetch('http://localhost:2000/api/auth/getuser', {
+            const response = await fetch(`${host}/api/auth/getuser`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ export default function UserDetails() {
             setPasswordError('');
         }
         try {
-            const response = await fetch('http://localhost:2000/api/auth/changepassword', {
+            const response = await fetch(`${host}/api/auth/changepassword`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -103,7 +104,7 @@ export default function UserDetails() {
 
     const deleteAllPasswords = async () => {
         try {
-            const response = await fetch('http://localhost:2000/api/passwords/deleteallpass', {
+            const response = await fetch(`${host}/api/passwords/deleteallpass`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -125,7 +126,7 @@ export default function UserDetails() {
 
     const deleteAccount = async () => {
         try {
-            const response = await fetch('http://localhost:2000/api/auth/deleteuser', {
+            const response = await fetch(`${host}/api/auth/deleteuser`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
