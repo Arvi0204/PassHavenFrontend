@@ -84,6 +84,7 @@ const PasswordForm = () => {
                     </div>
                 </div>
                 <button
+                    type="button"
                     disabled={!form.url || !form.username || !form.password}
                     onClick={savePassword}
                     className={`text-white flex justify-center items-center rounded-full w-fit gap-2 px-3 py-1 

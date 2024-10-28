@@ -3,7 +3,7 @@ import PasswordContext from "./passwordContext";
 import toast from "react-hot-toast";
 
 const PasswordState = (props) => {
-    const host = "https://pass-haven-backend.vercel.app"
+    const host = import.meta.env.VITE_BACKEND;
     const [passwordArray, setPasswordArray] = useState([]);
 
     const getPasswords = async () => {

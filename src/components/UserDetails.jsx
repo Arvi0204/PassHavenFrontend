@@ -11,7 +11,7 @@ export default function UserDetails() {
         createdAt: "",
         lastLogin: ""
     });
-    const host = "https://pass-haven-backend.vercel.app"
+    const host = import.meta.env.VITE_BACKEND;
     const [updatedPassword, setUpdatedPassword] = useState({ newPassword: "", confirmNewPassword: "" });
     const [showPassword, setShowPassword] = useState(false);
     const [passwordError, setPasswordError] = useState('');
