@@ -24,7 +24,7 @@ const PasswordForm = () => {
     };
 
     return (
-        <div className="md:container md:mx-auto md:pb-8 md:pt-16 md:px-40">
+        <div className="md:container md:mx-auto pb-4 md:pb-8 pt-8 md:pt-16 px-8 md:px-40">
             <h1 className="text-4xl font-bold text-center">
                 <span className="text-blue-500">&lt;</span>
                 Pass
