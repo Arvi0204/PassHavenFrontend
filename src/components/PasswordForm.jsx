@@ -49,7 +49,7 @@ const PasswordForm = () => {
                         name="username"
                         onChange={handleChange}
                         placeholder="Enter username"
-                        autoComplete="email"
+                        autoComplete="username"
                     />
                     <div className="relative flex-grow">
                         <input
@@ -70,17 +70,6 @@ const PasswordForm = () => {
                         >
                             {showPassword ? <EyeOffIcon className="h-5 w-5 text-gray-400" /> : <EyeIcon className="h-5 w-5 text-gray-400" />}
                         </button>
-                        {/* <span
-                            className="absolute right-2 top-1 cursor-pointer"
-                            onClick={togglePasswordVisibility}
-                        >
-                            <img
-                                ref={iconRef}
-                                width={24}
-                                src="icons/eye.png"
-                                alt="toggle password visibility"
-                            />
-                        </span> */}
                     </div>
                 </div>
                 <button
