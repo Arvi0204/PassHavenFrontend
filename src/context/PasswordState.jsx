@@ -8,6 +8,7 @@ const PasswordState = (props) => {
 
     const getPasswords = async () => {
         try {
+            console.log("BACKEND = ",host);
             // API CALL
             const response = await fetch(`${host}/api/passwords/fetchallpass`, {
                 method: 'GET',
