@@ -152,7 +152,7 @@ export default function UserDetails() {
         <>
             {/* <h2 className='relative top-10 text-center text-3xl font-bold'>Welcome, {user.username}</h2> */}
             <div className="flex flex-col lg:flex-row items-center justify-center min-h-[calc(100vh-124px)]">
-                <div className="bg-white rounded-lg shadow-md p-8 mx-10 lg:mx-5 my-10 lg:my-0"> {/* User Info Card */}
+                <div className="bg-white rounded-lg shadow-md p-8 mx-10 lg:mx-5 my-10 lg:my-5"> {/* User Info Card */}
                     <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">User Info</h2>
                     <div className="space-y-4 mb-6">
                         <div>

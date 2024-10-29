@@ -3,7 +3,7 @@ import React from "react";
 
 const ExtensionInstructions = () => {
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-124px)] mx-10 md:mx-0">
+    <div className="flex items-center justify-center min-h-[calc(100vh-124px)] mx-10 md:mx-0 my-5 md:my-0">
       <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-center text-2xl font-bold text-blue-700 mb-4">
           Installing the Extension

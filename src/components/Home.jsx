@@ -54,7 +54,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <h2 className="text-3xl font-semibold text-blue-600 mt-12 mb-4">Why Choose PassHaven?</h2>
+            <h2 className="text-3xl font-semibold text-blue-600 mt-12 mb-4 text-center">Why Choose PassHaven?</h2>
             <p className="text-lg text-gray-700 mb-8 text-center max-w-2xl">
                 At PassHaven, we prioritize your security and privacy. Our application is built with the latest technology to ensure that
                 your passwords are protected. Experience peace of mind knowing that your sensitive information is safe with us.

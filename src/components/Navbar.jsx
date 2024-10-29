@@ -76,7 +76,7 @@ const Navbar = () => {
 
   const renderNavLinks = () => (
     <li className="flex flex-col md:flex-row gap-6">
-      <Link className="flex gap-2 items-center hover:font-bold" to="/">
+      <Link className="flex gap-2 items-center hover:font-bold" to="/" onClick={()=>setIsDropdownOpen(!isDropdownOpen)}>
         <lord-icon
           src="https://cdn.lordicon.com/fkaukecx.json"
           trigger="hover"
@@ -86,7 +86,7 @@ const Navbar = () => {
       </Link>
       <div
         className="flex gap-2 items-center hover:font-bold cursor-pointer"
-        onClick={() => setIsGeneratorModalOpen(true)}
+        onClick={() => {setIsDropdownOpen(!isDropdownOpen);setIsGeneratorModalOpen(true)}}
       >
         <lord-icon
           src="https://cdn.lordicon.com/qnpnzlkk.json"
@@ -95,7 +95,7 @@ const Navbar = () => {
         />
         Generator
       </div>
-      <Link to="/user" className="flex items-center gap-2">
+      <Link to="/user" className="flex items-center gap-2" onClick={()=>setIsDropdownOpen(!isDropdownOpen)}>
         <lord-icon
           src="https://cdn.lordicon.com/hrjifpbq.json"
           trigger="hover"
