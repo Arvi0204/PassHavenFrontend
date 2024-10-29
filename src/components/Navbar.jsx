@@ -14,11 +14,11 @@ const Navbar = () => {
   const [isGeneratorModalOpen, setIsGeneratorModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   const confirmLogout = async () => {
     await setPasswordArray([]);
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     navigate("/login");
     toast.success("Logged out successfully!!!");
     setIsLogoutModalOpen(false);

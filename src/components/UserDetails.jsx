@@ -16,7 +16,7 @@ export default function UserDetails() {
     const [showPassword, setShowPassword] = useState(false);
     const [passwordError, setPasswordError] = useState('');
     const [modalState, setModalState] = useState({ isOpen: false, message: "", action: null });
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -65,7 +65,7 @@ export default function UserDetails() {
             if (json.success) {
                 toast.success(json.message);
                 setUpdatedPassword({ newPassword: "", confirmNewPassword: "" });
-                localStorage.removeItem('token');
+                sessionStorage.removeItem('token');
                 navigate("/login")
             } else {
                 json.errors.forEach(error => {
@@ -137,7 +137,7 @@ export default function UserDetails() {
 
             if (json.success) {
                 toast.success(json.message);
-                localStorage.removeItem('token');
+                sessionStorage.removeItem('token');
                 setModalState({ ...modalState, isOpen: false });
                 navigate("/home")
             }

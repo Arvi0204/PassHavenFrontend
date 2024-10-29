@@ -36,7 +36,7 @@ export default function Signup() {
 
             const json = await response.json();
             if (json.success) {
-                localStorage.setItem('token', json.authToken);
+                sessionStorage.setItem('token', json.authToken);
                 navigate("/");
                 toast.success("Created account successfully");
             } else {

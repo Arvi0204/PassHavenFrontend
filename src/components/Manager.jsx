@@ -7,7 +7,7 @@ const Manager = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-        if (!localStorage.getItem('token')) {
+        if (!sessionStorage.getItem('token')) {
             navigate('/home');
         }
     }, [])
