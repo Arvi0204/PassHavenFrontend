@@ -90,10 +90,13 @@ const PasswordTable = () => {
       </div>
     );
   };
-  const renderActionButton = () => {
+  const renderActionButton = (item) => {
     return (
       <div className="flex justify-center items-center gap-3">
-        <button className="flex items-center gap-2 focus:outline-none text-black bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-1 transition ease-in-out duration-2000">
+        <button 
+        className="flex items-center gap-2 focus:outline-none text-black bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-1 transition ease-in-out duration-2000"
+        onClick={() => editPassword(item._id)}
+        >
           Edit
           <img
             className="cursor-pointer"
@@ -185,7 +188,7 @@ const PasswordTable = () => {
                       {renderPassword(item, isPasswordVisible)}
                     </td>
                     <td className="py-2 border-2 border-black text-center">
-                      {renderActionButton()}
+                      {renderActionButton(item)}
                     </td>
                   </tr>
                 );
@@ -259,8 +262,8 @@ const PasswordTable = () => {
                           onClick={() => copyText(item.username, "username")}
                         />
                       </div>
-                      {renderPassword(item,isPasswordVisible)}
-                      {renderActionButton()}
+                      {renderPassword(item, isPasswordVisible)}
+                      {renderActionButton(item)}
                     </div>
                   </div>
                 </div>
