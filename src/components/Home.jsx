@@ -23,7 +23,7 @@ const Home = () => {
                     </p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-xl font-bold text-blue-500 mb-2">User-Friendly Interface</h3>
+                    <h3 className="text-xl font-bold text-blue-500 mb-2">Responsive User Interface</h3>
                     <p className="text-gray-600">
                         Our intuitive design makes it easy for you to manage your passwords, with a seamless experience on both web and mobile.
                     </p>
@@ -41,9 +41,9 @@ const Home = () => {
                     </p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-xl font-bold text-blue-500 mb-2">Two-Factor Authentication</h3>
+                    <h3 className="text-xl font-bold text-blue-500 mb-2">Web Extension for Autofill</h3>
                     <p className="text-gray-600">
-                        Enhance your account security with our two-factor authentication feature, adding an extra layer of protection to your passwords.
+                        Autofill your login credentials across websites with our web extension for effortless, secure access.
                     </p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-md">

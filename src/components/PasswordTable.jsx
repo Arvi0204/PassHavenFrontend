@@ -212,7 +212,7 @@ const PasswordTable = () => {
                     <button
                       type="button"
                       onClick={() => toggleAccordionVisibility(item._id)}
-                      className="flex items-center justify-between w-full p-5 font-semibold bg-blue-800 text-white underline hover:bg-blue-600 gap-3 transition duration-300 rounded-t-lg"
+                      className="flex flex-wrap items-center justify-between w-full p-5 font-semibold bg-blue-800 text-white underline hover:bg-blue-600 gap-3 transition duration-300 rounded-t-lg"
                       aria-expanded={isAccordionOpen}
                       aria-controls={`accordion-collapse-body-${item._id}`}
                     >
