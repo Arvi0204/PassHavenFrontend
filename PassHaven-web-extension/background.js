@@ -1,5 +1,7 @@
 let authToken = '';
-let backendHost = 'https://pass-haven-backend.vercel.app'
+let backendHost = 'https://pass-haven-backend.vercel.app';
+const TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 day login time
+
 // Function to clear the auth token from storage
 function clearAuthToken() {
     chrome.storage.local.remove("authToken");
@@ -17,15 +19,18 @@ function loadAuthToken() {
 // Call this function to load token when the service worker is started
 loadAuthToken();
 
-// Listen for when a window is removed
-chrome.windows.onRemoved.addListener(() => {
-    chrome.windows.getAll({}, (windows) => {
-        if (windows.length === 0) { // All windows closed
-            console.log("Logging out");
-            clearAuthToken();
-        }
-    });
+// Listen for when Chrome starts up
+chrome.runtime.onStartup.addListener(() => {
+    loadAuthToken();
 });
+
+// Function to set the auth token
+function setAuthToken(token) {
+    chrome.storage.local.set({ "authToken": token });
+    setTimeout(() => {
+        clearAuthToken();
+    }, TOKEN_EXPIRATION_TIME);
+}
 
 // Existing message listener code for login and fetching passwords...
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -44,8 +49,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             .then(data => {
                 if (data.success) {
                     authToken = data.authToken;
-                    // Store the token in Chrome's local storage
-                    chrome.storage.local.set({ authToken: authToken });
+                    setAuthToken(authToken)
                     sendResponse({ success: true });
                 } else {
                     sendResponse({ success: false, error: data.error });
