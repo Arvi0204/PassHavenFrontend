@@ -8,7 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-PassHaven-web-extension
 dist
 dist-ssr
 *.local

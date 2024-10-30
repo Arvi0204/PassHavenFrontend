@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "PassHaven - Secure Password Manager",
+  "version": "1.7",
+  "description": "A secure and user-friendly password manager that helps you store, manage, and autofill your passwords effortlessly.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "windows"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "192": "icons/icon192.png",
+      "512": "icons/icon512.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "192": "icons/icon192.png",
+    "512": "icons/icon512.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
