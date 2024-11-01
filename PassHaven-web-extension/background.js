@@ -1,35 +1,10 @@
-let authToken = '';
 let backendHost = 'https://pass-haven-backend.vercel.app';
-const TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 day login time
-
-// Function to clear the auth token from storage
-function clearAuthToken() {
-    chrome.storage.local.remove("authToken");
-}
-
-// Load the token on service worker start
-function loadAuthToken() {
-    chrome.storage.local.get(['authToken'], (result) => {
-        if (result.authToken) {
-            authToken = result.authToken; // Store token in memory
-        }
-    });
-}
-
-// Call this function to load token when the service worker is started
-loadAuthToken();
-
-// Listen for when Chrome starts up
-chrome.runtime.onStartup.addListener(() => {
-    loadAuthToken();
-});
+const TOKEN_EXPIRATION_TIME = 10 * 1000; // 1 day login time
 
 // Function to set the auth token
 function setAuthToken(token) {
-    chrome.storage.local.set({ "authToken": token });
-    setTimeout(() => {
-        clearAuthToken();
-    }, TOKEN_EXPIRATION_TIME);
+    const expiryTime = Date.now() + TOKEN_EXPIRATION_TIME;
+    chrome.storage.local.set({ authToken: token, tokenExpiry: expiryTime });
 }
 
 // Existing message listener code for login and fetching passwords...
@@ -60,15 +35,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     if (request.type === 'fetchPasswords') {
-        fetch(`${backendHost}/api/passwords/fetchallpass`, {
-            method: 'GET',
-            headers: {
-                'auth-token': `${authToken}`,
-            },
-        })
-            .then(response => response.json())
-            .then(passwords => sendResponse({ success: true, passwords }))
-            .catch(error => sendResponse({ success: false, error: error.message }));
-        return true;
+        chrome.storage.local.get(['authToken'], (result) => {
+            const authToken = result.authToken; // Retrieve the token from local storage
+            fetch(`${backendHost}/api/passwords/fetchallpass`, {
+                method: 'GET',
+                headers: {
+                    'auth-token': authToken,
+                },
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch passwords: Invalid token or server error');
+                }
+                return response.json();
+            })
+                .then(passwords => sendResponse({ success: true, passwords }))
+                .catch(error => sendResponse({ success: false, error: error.message }));
+        });
+        return true; // Keep the message channel open for async response
     }
 });

@@ -9,27 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("password").value = "";
 
         // Clearing local storage variables to ensure access to validated users
-        chrome.storage.local.remove('authToken');
-        chrome.storage.local.remove('passwords');
+        chrome.storage.local.remove(['authToken', 'passwords', 'tokenExpiry']);
         document.getElementById("passwordsContainer").classList.add("hidden");
         document.getElementById("loginForm").classList.remove("hidden");
-        showToast("Logged out successfully!",true)
+        showToast("Logged out successfully!", true)
     });
-    document.getElementById("redirect").addEventListener("click", handleRedirect);
-
+    
+    document.getElementById("redirect").addEventListener("click", () => { chrome.tabs.create({ url: 'https://pass-haven.netlify.app/' }) });
+    
     // Run this check to see if the user is already logged in
-    chrome.storage.local.get(["authToken"], (result) => {
-        if (result.authToken) {
+    chrome.storage.local.get(["authToken", 'tokenExpiry'], (result) => {
+        if (result.authToken && Date.now() < result.tokenExpiry) {
             document.getElementById("loginForm").classList.add("hidden");
             document.getElementById("passwordsContainer").classList.remove("hidden");
             fetchPasswords();
+        } else {
+            showToast("Session expired, please login again", false)
+            //Clearing authtoken
+            chrome.storage.local.remove(['authToken', 'passwords', 'tokenExpiry']);
+            authToken = '';
         }
     });
 });
-
-function handleRedirect() {
-    chrome.tabs.create({ url: 'https://pass-haven.netlify.app/' });
-}
 
 function handleLogin(e) {
     // Include event parameter
@@ -78,7 +79,7 @@ function copyToClipboard(text, type) {
             // Show the toast notification
             showToast(`Copied ${type} to clipboard`, true);
         })
-        .catch((err) => {
+        .catch(() => {
             showToast("Failed to copy. Please try again.", false);
         });
 }
@@ -110,7 +111,7 @@ function fetchPasswords() {
                 const messageCell = document.createElement('td');
 
                 // Set colspan to the number of columns in your table (adjust as necessary)
-                messageCell.setAttribute('colspan', '3'); // Assuming you have 3 columns
+                messageCell.setAttribute('colspan', '3');
                 messageCell.classList.add('text-sm', 'text-white', 'text-center', 'font-bold');
                 messageCell.innerHTML = "Please add passwords to display";
 
@@ -161,10 +162,7 @@ function fetchPasswords() {
                 });
             }
         } else {
-            const error = document.createElement("div");
-            error.classList.add(..."text-white text-center font-bold py-5".split(" "));
-            error.innerHTML = `Failed to fetch passwords: ${response.error}`;
-            document.getElementById("passwordsContainer").insertAdjacentElement("afterend", error);
+            showToast(`Failed to fetch passwords: ${response.error}`, false)
         }
     });
 }
@@ -188,7 +186,7 @@ function showToast(message, type) {
         toast.classList.add("show");
     });
 
-    // Hide the toast after 2 seconds
+    // Hide the toast after 1.5 seconds
     setTimeout(() => {
         toast.classList.remove("show");
         // Remove the toast from the DOM after hiding
