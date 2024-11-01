@@ -1,5 +1,5 @@
 let backendHost = 'https://pass-haven-backend.vercel.app';
-const TOKEN_EXPIRATION_TIME = 10 * 1000; // 1 day login time
+const TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 day login time
 
 // Function to set the auth token
 function setAuthToken(token) {
@@ -23,8 +23,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    authToken = data.authToken;
-                    setAuthToken(authToken)
+                    setAuthToken(data.authToken)
                     sendResponse({ success: true });
                 } else {
                     sendResponse({ success: false, error: data.error });

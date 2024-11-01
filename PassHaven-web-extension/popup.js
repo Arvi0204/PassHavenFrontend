@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
             showToast("Session expired, please login again", false)
             //Clearing authtoken
             chrome.storage.local.remove(['authToken', 'passwords', 'tokenExpiry']);
-            authToken = '';
         }
     });
 });
